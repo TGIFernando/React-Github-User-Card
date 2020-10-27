@@ -3,6 +3,7 @@ import axios from 'axios'
 import './App.css';
 import Card from './Card'
 
+
 class App extends Component{
   state = {
     userName: '',
@@ -10,7 +11,24 @@ class App extends Component{
     html_url: '',
     name: '',
     bio: '',
+    followers: [],
     input: '',
+    followersOn: false,
+  }
+
+  toggleFollowers = () => {
+    this.setState({
+      followersOn: !this.state.followersOn
+    })
+  }
+
+  fetchFollowers = (user) => {
+    axios.get(`https://api.github.com/users/${user}/followers`)
+      .then(res => {
+        this.setState({followers: res.data})
+      }).catch(err => {
+        console.log('Error: ', err)
+      })
   }
 
   fetchData = (user) => {
@@ -23,14 +41,14 @@ class App extends Component{
           name: res.data.name,
           bio: res.data.bio,
         })
-        console.log(this.state)
       }).catch(err => {
         console.log('Error: ', err)
       })
   }
 
   componentDidMount(){
-    this.fetchData('MileyWright')
+    this.fetchData('tgifernando')
+    this.fetchFollowers('tgifernando')
   }
 
   onChange = e => {
@@ -40,8 +58,9 @@ class App extends Component{
   onSubmit = e => {
     e.preventDefault()
     this.fetchData(this.state.input)
-    this.setState({input: ''})
+    this.setState({input: ''}) 
   }
+ 
 
   render(){  
     return (
@@ -51,7 +70,7 @@ class App extends Component{
           <input onChange={this.onChange} value={this.state.input} type='text' placeholder='Github User Name'/>
           <button>Look Up User</button>
         </form>
-        <Card data={this.state}/>
+        <Card data={this.state} toggleFollowers={this.toggleFollowers}/>
       </div>
     );
   }
