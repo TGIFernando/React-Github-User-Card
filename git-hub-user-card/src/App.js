@@ -58,6 +58,7 @@ class App extends Component{
   onSubmit = e => {
     e.preventDefault()
     this.fetchData(this.state.input)
+    this.fetchFollowers(this.state.input)
     this.setState({input: ''}) 
   }
  
