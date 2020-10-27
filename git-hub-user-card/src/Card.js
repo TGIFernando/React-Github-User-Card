@@ -9,7 +9,7 @@ export default function Card (props) {
            <img src={data.avatar_url} alt='profile photo'/>
             <h2>Name: {data.name}</h2>
             <h2>Bio: {data.bio}</h2>
-            <h2>URL: <a href={data.html_url}>link</a> </h2>
+            <h2>URL: <a target='_blank' href={data.html_url}>{data.userName}</a> </h2>
        </div>
     )
 }

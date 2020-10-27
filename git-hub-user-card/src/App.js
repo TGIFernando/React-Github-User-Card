@@ -10,6 +10,7 @@ class App extends Component{
     html_url: '',
     name: '',
     bio: '',
+    input: '',
   }
 
   fetchData = (user) => {
@@ -32,10 +33,24 @@ class App extends Component{
     this.fetchData('MileyWright')
   }
 
+  onChange = e => {
+    this.setState({input: e.target.value})
+  }
+
+  onSubmit = e => {
+    e.preventDefault()
+    this.fetchData(this.state.input)
+    this.setState({input: ''})
+  }
+
   render(){  
     return (
       <div className="App">
         <h1>Git Hub Card Finder</h1>
+        <form onSubmit={this.onSubmit}>
+          <input onChange={this.onChange} value={this.state.input} type='text' placeholder='Github User Name'/>
+          <button>Look Up User</button>
+        </form>
         <Card data={this.state}/>
       </div>
     );
