@@ -13,7 +13,7 @@ export default function Card (props) {
                 <h2>URL: <a target='_blank' href={data.html_url}>{data.userName}</a> </h2>
                 <h2>Followers: <span className='followersNum' onClick={toggleFollowers}>{data.followers.length}</span></h2>
                 <div className={`followers${data.followersOn ? 'On' : 'Off'}`}>
-                    {data.followers.map(item=>(<ul key={data.followers.id}>{item.login}</ul>))}
+                    {data.followers.map(item=>(<ul key={item.id}>{item.login}</ul>))}
                 </div>
             </div>
        </div>

@@ -3,7 +3,6 @@ import axios from 'axios'
 import './App.css';
 import Card from './Card'
 
-
 class App extends Component{
   state = {
     userName: '',
@@ -59,9 +58,11 @@ class App extends Component{
     e.preventDefault()
     this.fetchData(this.state.input)
     this.fetchFollowers(this.state.input)
-    this.setState({input: ''}) 
+    this.setState({
+      input: '',
+      followersOn: false,
+  }) 
   }
- 
 
   render(){  
     return (
